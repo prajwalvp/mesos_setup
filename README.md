@@ -1,2 +1,3 @@
 # mesos_setup
-Pulsar Search Pipeline using Mesos
+
+Pulsar Search Pipeline using Mesos and Marathon
