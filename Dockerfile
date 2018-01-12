@@ -2,8 +2,8 @@ FROM ubuntu:16.04
 #RUN apt-get install python3-pip && \
 #    pip3 install --upgrade pip
 
-RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
-    apt-get update && \
+#RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
+RUN apt-get update && \
     apt-get -y upgrade && \
   #apt-get install -y build-essential && \
   #apt-get install -y software-properties-common && \
@@ -17,6 +17,8 @@ RUN pip3 install pika
 # Define working directory.
 WORKDIR /tests
 COPY consumer.py .
-#RUN python3 consumer.py
+COPY test.py .
+RUN python3 test.py
+
 
 
