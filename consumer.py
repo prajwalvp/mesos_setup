@@ -1,6 +1,6 @@
 import logging
 import pika
-
+import sys
 LOG_FORMAT = ('%(levelname) -10s %(asctime)s %(name) -30s %(funcName) '
               '-35s %(lineno) -5d: %(message)s')
 LOGGER = logging.getLogger(__name__)
@@ -337,7 +337,7 @@ class ExampleConsumer(object):
 
 def main():
     logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
-    example = ExampleConsumer('amqp://guest:guest@localhost:5672/%2F')
+    example = ExampleConsumer('amqp://guest:guest@{hostname}:5672/%2F'.format(hostanme=sys.argv[1]))
     try:
         example.run()
     except KeyboardInterrupt:
