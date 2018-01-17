@@ -16,7 +16,7 @@ RUN pip3 install --upgrade pip
 RUN pip3 install pika
 # Define working directory.
 WORKDIR /tests
-COPY consumer.py .
+COPY consumer1.py .
 COPY test.py .
 RUN python3 test.py
 
