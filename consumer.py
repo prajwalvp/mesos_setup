@@ -1,3 +1,8 @@
+
+##This code has been retrieved from the link : http://pika.readthedocs.io/en/0.10.0/examples/asynchronous_consumer_example.htm#
+
+
+
 import logging
 import pika
 import sys
