@@ -337,7 +337,7 @@ class ExampleConsumer(object):
 
 def main():
     logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
-    example = ExampleConsumer('amqp://guest:guest@{hostname}:5672/%2F'.format(hostanme=sys.argv[1]))
+    example = ExampleConsumer('amqp://guest:guest@{hostname}:5672/%2F'.format(hostname=sys.argv[1]))
     try:
         example.run()
     except KeyboardInterrupt:
