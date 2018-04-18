@@ -1,24 +1,33 @@
-FROM ubuntu:16.04
-#RUN apt-get install python3-pip && \
-#    pip3 install --upgrade pip
+FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
-#RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
-RUN apt-get update && \
-    apt-get -y upgrade && \
-  #apt-get install -y build-essential && \
-  #apt-get install -y software-properties-common && \
-  #apt-get install -y byobu curl git htop man unzip vim wget && \
-    apt-get install --no-install-recommends -y  python3 python3-dev python3-pip && \
-#    pip3 install -- upgrade pip && \
+RUN apt-get update &&\
+    apt-get install -y --no-install-recommends \
+    git \   
+    vim \	
+    ca-certificates
+
+WORKDIR /software/
+
+RUN git clone https://github.com/ewanbarr/dedisp.git && \
+    cd dedisp &&\
+    make -j 32 && \
+    make install 
+
+RUN git clone https://github.com/ewanbarr/peasoup.git && \
+    cd peasoup && \
+    make -j 32 && \
+    make install 
+   
+RUN ldconfig /usr/local/lib
+
+
+RUN apt-get install --no-install-recommends -y  python3 python3-dev python3-pip && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --upgrade pip
 RUN pip3 install pika
+
 # Define working directory.
-WORKDIR /tests
-COPY consumer.py .
-COPY test.py .
-RUN python3 test.py
-
-
-
+WORKDIR /pika_tests/
+COPY consume.py .
+COPY publish.py .
