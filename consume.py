@@ -3,21 +3,21 @@ import os
 import sys
 import json
 from subprocess import call
-
+import time
 
 
 i=1
 # Setup pika connection 
 while True:
-        if sys.argv[i]=='-host':
-                hostname=sys.argv[i+1]
-                i=i+2
-        if sys.argv[i]=='-queue':
-                queuename=sys.argv[i+1]
-                i=i+2
-        if sys.argv[i]=='-path':
-                path=sys.argv[i+1]
-                break
+	if sys.argv[i]=='-host':
+		hostname=sys.argv[i+1]
+		i=i+2
+	if sys.argv[i]=='-queue':
+		queuename=sys.argv[i+1]
+		i=i+2
+	if sys.argv[i]=='-path':
+		path=sys.argv[i+1]
+		break
 
 def receive():
     parameters = pika.ConnectionParameters(hostname)
@@ -36,13 +36,13 @@ def receive():
 
 
 while True:
-        try:
-                info = receive();
-                script1= "mkdir %s/%s" %(path,info['filename'])
-                script1 = "peasoup -i %s -o %s/%s" %(info['input path']+'/'+info['filename'],path,info['filename'])
-                call(script1,shell=True)
-                print(info['filename'] + ' processed')
-        except AttributeError:
-                print('No more messages in broker!')
-                break
-
+	try:
+		info = receive();
+		script1= "mkdir %s/%s" %(path,info['filename'])
+		script1 = "peasoup -i %s -o %s/%s" %(info['input path']+'/'+info['filename'],path,info['filename'])
+		call(script1,shell=True)
+		print(info['filename'] + ' processed')
+	except AttributeError:
+		print('No more messages in broker!')
+		time.sleep(5)
+		continue
