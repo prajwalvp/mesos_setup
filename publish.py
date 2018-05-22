@@ -20,7 +20,8 @@ while True:
 
 #print(hostname)
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname))  # hostname 
+credentials = pika.PlainCredentials('guest','guest')
+connection = pika.BlockingConnection(pika.ConnectionParameters('%s'%hostname,5672,'/',credentials))  # hostname 
 channel = connection.channel()
 
 

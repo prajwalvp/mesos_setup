@@ -20,7 +20,8 @@ while True:
 		break
 
 def receive():
-    parameters = pika.ConnectionParameters(hostname)
+    credentials= pika.PlainCredentials('guest','guest')
+    parameters = pika.ConnectionParameters('%s'%hostname,5672,'/',credentials)
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
     channel.queue_declare(queue=queuename)
