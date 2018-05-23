@@ -2,48 +2,41 @@ import pika
 import json
 import glob
 import sys
-
-i=1
-# Setup pika connection 
-while True:
-        if sys.argv[i]=='-host':
-                hostname=sys.argv[i+1]
-                i=i+2
-        if sys.argv[i]=='-queue':
-                queuename=sys.argv[i+1]
-                i=i+2
-        if sys.argv[i]=='-path':
-                path=sys.argv[i+1]
-                break
+import optparse
 
 
 
-#print(hostname)
+# Pass arguments 
+parser = optparse.OptionParser()
+parser.add_option('-H','--host',dest="hostname")
+parser.add_option('-Q','--queue',dest="queuename")
+parser.add_option('-p','--path',dest="file_path")
 
+options,remainder = parser.parse_args()
+
+
+
+# Pika setup
 credentials = pika.PlainCredentials('guest','guest')
-connection = pika.BlockingConnection(pika.ConnectionParameters('%s'%hostname,5672,'/',credentials))  # hostname 
+connection = pika.BlockingConnection(pika.ConnectionParameters(options.hostname,31861,'/',credentials))  
 channel = connection.channel()
+channel.queue_declare(queue=options.queuename)
 
 
-
-channel.queue_declare(queue=queuename)            # queue name
-
-all_filterbank = glob.glob(path+'/'+'*.fil')
-
+#Find all filterbank files
+all_filterbank = glob.glob(options.file_path+'/'+'*.fil')
 print(all_filterbank)
-
 filterbank=[]
 for i in all_filterbank:
-    filterbank.append(i.replace(path+'/',''))
+    filterbank.append(i.replace(options.file_path+'/',''))
 
 
 
-
+# Publish to RabbitMQ
 for i in range(len(all_filterbank)):
-    data={"project id":"PMPS","filename":filterbank[i],"input path":path}
+    data={"project id":"PMPS","filename":filterbank[i],"input path":options.file_path}
     message = json.dumps(data).encode('utf-8')
-    channel.basic_publish(exchange='',routing_key=queuename,body=message)
+    channel.basic_publish(exchange='',routing_key=options.queuename,body=message)
     print("  Sent data! %d" %i)
 
 connection.close()
-
