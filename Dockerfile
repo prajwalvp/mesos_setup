@@ -10,6 +10,7 @@ WORKDIR /software/
 
 RUN git clone https://github.com/ewanbarr/dedisp.git && \
     cd dedisp &&\
+    git checkout arch61 &&\
     make -j 32 && \
     make install 
 
