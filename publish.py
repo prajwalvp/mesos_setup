@@ -28,13 +28,13 @@ all_filterbank = glob.glob(options.file_path+'/'+'*.fil')
 print(all_filterbank)
 filterbank=[]
 for i in all_filterbank:
-    filterbank.append(i.replace(options.file_path+'/',''))
+    filterbank.append(i.strip(options.file_path+'/'))
 
 
 
 # Publish to RabbitMQ
 for i in range(len(all_filterbank)):
-    data={"project id":"PMPS","filename":filterbank[i],"input path":options.file_path}
+    data={"project_id":"PMPS","filename":filterbank[i],"input_path":options.file_path}
     message = json.dumps(data).encode('utf-8')
     channel.basic_publish(exchange='',routing_key=options.queuename,body=message)
     print("  Sent data! %d" %i)
