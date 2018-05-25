@@ -31,7 +31,7 @@ RUN pip3 install --upgrade pip
 RUN pip3 install pika
 
 RUN git clone https://github.com/ewanbarr/pikaprocess.git && \
-    mv pika_process.py /pika_tests/
+    cp pikaprocess/pika_process.py /pika_tests/
 
 # Define working directory.
 WORKDIR /pika_tests/
