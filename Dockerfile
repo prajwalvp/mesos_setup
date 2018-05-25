@@ -33,9 +33,11 @@ RUN pip3 install pika
 WORKDIR /pika_tests/
 
 RUN git clone https://github.com/ewanbarr/pikaprocess.git && \
+    cd pikaprocess && \
     git checkout peasoup && \
-    cp pikaprocess/pika_process.py .
+    cp pika_process.py ../
 
+WORKDIR /pika_tests/
 # Define working directory.
 COPY consume.py .
 COPY publish.py .
