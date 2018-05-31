@@ -2,6 +2,8 @@ FROM ubuntu:16.04
 #RUN apt-get install python3-pip && \
 #    pip3 install --upgrade pip
 
+MAINTAINER Prajwal Padmanabh "prajwalvp@mpifr-bonn.mpg.de"
+
 #RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
 RUN apt-get update && \
     apt-get -y upgrade && \
