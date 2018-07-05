@@ -41,3 +41,4 @@ WORKDIR /pika_tests/
 # Define working directory.
 COPY consume.py .
 COPY publish.py .
+COPY folding_inputs.py .
