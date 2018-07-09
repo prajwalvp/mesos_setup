@@ -1,4 +1,4 @@
-MPIFR DSPSR docker
+MPIFR Presto docker
 ===================
 
 Pulling a built image

@@ -1,8 +1,8 @@
 version: '2'
 services:
-  dspsr:
+  presto:
     build: .
-    container_name: dspsr
+    container_name: presto
     volumes:
      - .:/data/
      - "/var/run/docker.sock:/var/run/docker.sock"
@@ -10,6 +10,6 @@ services:
     expose:
      - "22"
     ports:
-     - "2224:22/tcp"
-    image: "mpifrpsr/dspsr"
-    command: "/usr/sbin/sshd -D"
+     - "2223:22/tcp"
+    image: "mpifrpsr/presto"
+    command: "/usr/sbin/sshd -D"  
