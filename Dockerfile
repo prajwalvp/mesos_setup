@@ -7,7 +7,7 @@
 
 FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
-MAINTAINER Ewan Barr "ebarr@mpifr-bonn.mpg.de"
+#CREDITS Ewan Barr "ebarr@mpifr-bonn.mpg.de"
 
 # Suppress debconf warnings
 ENV DEBIAN_FRONTEND noninteractive
