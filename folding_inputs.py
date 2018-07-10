@@ -22,7 +22,7 @@ def middle_epoch(epoch_start, no_of_samples, tsamp):
      return epoch_start +0.5*no_of_samples*tsamp 
 
 def main(opts):
-    all_xml_files = glob.glob('*.xml') # needs to be changed for recursive reading 
+    all_xml_files = glob.iglob('/output/**/*.xml') # needs to be changed for recursive reading 
     mod_period=[]
     period = []
     dm= []
