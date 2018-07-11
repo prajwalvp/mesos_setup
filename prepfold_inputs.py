@@ -12,6 +12,7 @@ def on_message(body,opts):
     subprocess.check_call(["prepfold","-topo","-p",str(folding_packet['period']),"-pd",str(folding_packet['pdot']),"-dm",str(folding_packet['dm']),str(folding_packet['file path']),"-o",opts.output_file_path+str(folding_packet['source'])])
 
 
+
 def main(opts):
     processor = pika_process.pika_process_from_opts(opts)
     processor.process(lambda message: on_message(message, opts))
