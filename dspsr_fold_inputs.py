@@ -6,7 +6,7 @@ import pika_process
 import optparse
 
 def on_message(body,opts):
-    folding_packet = json.load(f)
+    folding_packet = json.load(body)
     with open('%s.txt'%(candidate[:-3]),'w') as f:
         f.write('SOURCE: %s\n'%folding_packet['source'])
         f.write('PERIOD: %s\n'%folding_packet['period'])
