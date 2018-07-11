@@ -8,8 +8,8 @@ import optparse
 
 
 def on_message(body,opts):
-    folding_packet = json.load(f)
-    subprocess.check_call(["prepfold","-topo","-start","0.5","-p",str(folding_packet['period']),"-pd",str(folding_packet['pdot']),"-dm",str(folding_packet['dm']),str(folding_packet['file path'])])
+    folding_packet = json.loads(body.decode("utf=8"))
+    subprocess.check_call(["prepfold","-topo","-p",str(folding_packet['period']),"-pd",str(folding_packet['pdot']),"-dm",str(folding_packet['dm']),str(folding_packet['file path'])])
 
 
 
