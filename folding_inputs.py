@@ -23,15 +23,19 @@ def middle_epoch(epoch_start, no_of_samples, tsamp):
 
 def main(opts):
     all_xml_files = glob.iglob('/output/**/*.xml') # needs to be changed for recursive reading 
-    mod_period=[]
-    period = []
-    dm= []
-    acc=[]
-    pdot=[]
+    #mod_period=[]
+    #period = []
+    #dm= []
+    #acc=[]
+    #pdot=[]
     for xml_file in all_xml_files:
         tree = ET.parse(xml_file)
         root = tree.getroot()
-
+        mod_period=[]
+        period=[]
+        dm=[]
+        acc=[]
+        pdot=[]  
     # Header Parameters
         ra = root.find('header_parameters/src_raj').text
         dec = root.find('header_parameters/src_dej').text     
