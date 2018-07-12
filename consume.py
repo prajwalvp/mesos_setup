@@ -10,8 +10,7 @@ import optparse
 def on_message(body,opts):
     info = json.loads(body.decode("utf=8"))
     script1 = "mkdir %s/%s" %(opts.output_file_path,info['filename'])
-    script2 = "peasoup -i %s -o %s/%s" %(info['input_path']+'/'+info['filename'],opts.output_file_path,info['filename'])
-    script3 = 
+    script2 = "peasoup -i %s -o %s/%s" %(info['input_path']+'/'+info['filename'],opts.output_file_path,info['filename']) 
     print("Making directory for %s" %info['filename'])
     call(script1,shell=True)
     print("Made directory for %s" %info['filename'])
