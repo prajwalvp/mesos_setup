@@ -9,7 +9,7 @@ import optparse
 
 def on_message(body,opts):
     folding_packet = json.loads(body.decode("utf=8"))
-    subprocess.check_call(["prepfold","-topo","-p",str(folding_packet['period']),"-pd",str(folding_packet['pdot']),"-dm",str(folding_packet['dm']),str(folding_packet['file path']),"-o",opts.output_file_path+str(folding_packet['source'])])
+    subprocess.check_call(["prepfold","-noxwin","-topo","-p",str(folding_packet['period']),"-pd",str(folding_packet['pdot']),"-dm",str(folding_packet['dm']),str(folding_packet['file path']),"-o",opts.output_file_path+str(folding_packet['source'])])
 
 
 
