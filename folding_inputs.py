@@ -67,7 +67,7 @@ def main(opts):
     
 
     # Fold topocentrically and with corrected period!
-    
+        producer = pika_process.pika_producer_from_opts(opts)
         for i in range(int(opts.no_of_candidates)):
             folding_packet={}
             folding_packet['source'] = source_name
@@ -81,8 +81,7 @@ def main(opts):
             folding_packet['file path'] = path_file_name 
 
             #with open('%s_cand_%d.json'%(source_name,i+1),'w') as f:
-
-            producer = pika_process.pika_producer_from_opts(opts)
+            
             message = json.dumps(folding_packet).encode('utf-8')
             print ("Sending candidate %s info for folding..."%i)
             producer.publish(message)
