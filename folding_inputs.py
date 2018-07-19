@@ -22,6 +22,7 @@ def middle_epoch(epoch_start, no_of_samples, tsamp):
      return epoch_start +0.5*no_of_samples*tsamp 
 
 def main(opts):
+    producer = pika_process.pika_producer_from_opts(opts)
     all_xml_files = glob.iglob('/output/**/*.xml') # needs to be changed for recursive reading 
     #mod_period=[]
     #period = []
@@ -67,7 +68,7 @@ def main(opts):
     
 
     # Fold topocentrically and with corrected period!
-        producer = pika_process.pika_producer_from_opts(opts)
+        
         for i in range(int(opts.no_of_candidates)):
             folding_packet={}
             folding_packet['source'] = source_name
