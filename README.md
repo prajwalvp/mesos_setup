@@ -1,3 +1,1 @@
-
-
-Dockerfile for Pulsar Search Pipeline using Peasoup and Pika
+Dockerfile for pika and sigpyproc - for extracting metadata and publishing to RabbitMQ 
